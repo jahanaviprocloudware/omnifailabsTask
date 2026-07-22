@@ -99,7 +99,7 @@ if st.button("Get Answer"):
             "Please enter a question."
         )
 
-    else:
+    try:
 
         answer = ask_question(
             st.session_state["vector_store"],
@@ -114,3 +114,13 @@ if st.button("Get Answer"):
         <div style="font-size: 24px; font-weight: bold;">{answer}</div>""",
         unsafe_allow_html=True
         )
+        
+    except Exception as e:
+        error = str(e)
+
+        if "429" in error or "RESOURCE_EXHAUSTED" in error:
+                st.error(
+            "Gemini API quota has been exceeded. Please use another Gemini API key or wait for the quota to reset."
+        )
+        else:
+                st.error(f"Error: {error}")
