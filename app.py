@@ -48,7 +48,7 @@ if uploaded_file:
 
     if "secret_key" not in st.session_state:
         st.warning(
-            "Please validate or submit Secret key first."
+            "Please submit Secret key first."
         )
 
     else:
